@@ -1,9 +1,15 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
+    TelegramModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
