@@ -14,11 +14,11 @@ export class TelegramService {
     this.bot.on('message', this.onReceiveMessage.bind(this));
   }
   private onReceiveMessage(message: TelegramBot.Message) {
-    const { username } = message.chat;
+    const { chat, text } = message.chat;
+    const { id, username } = chat;
     const date = new Date(message.date * 1000).toLocaleString();
-    const text = message.text;
     this.logger.debug({ username, date, text });
-    this.sendMessage(message.chat.id, `Hello ${username}! This is from the Nest server 👋`);
+    this.sendMessage(id, `Hello ${username}! This is from the Nest server 👋`);
   }
   private sendMessage(chatId: TelegramBot.ChatId, text: string) {
     this.bot.sendMessage(chatId, text);
